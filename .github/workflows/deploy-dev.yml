@@ -1,0 +1,17 @@
+name: Deploy on Develop Branch Merge
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  trigger-repository-dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.VS_PAT }}
+          repository: baynineventures/frappe_docker
+          event-type: release-dev
